@@ -14,13 +14,13 @@ exports.run = (client) => {
     if(!client.kulkiLicznik) client.kulkiLicznik = 1
     else client.kulkiLicznik++
     if(!client.kulkiCzas) client.kulkiCzas = Date.now()
-    if(!client.kulkiPróg) client.kulkiPróg = Math.floor(Math.random() /** 50 + 50*/+5 );
+    if(!client.kulkiPróg) client.kulkiPróg = Math.floor(Math.random() * 200 + 300);
 
 
-    if(client.kulkiLicznik > client.kulkiPróg && Date.now() - client.kulkiCzas > 6/*00000*/){
+    if(client.kulkiLicznik > client.kulkiPróg && Date.now() - client.kulkiCzas > 7200000){
         client.kulkiLicznik = 0
         client.kulkiCzas = Date.now()
-        client.kulkiPróg = Math.floor(Math.random() /** 50 + 50*/+5 )
+        client.kulkiPróg = Math.floor(Math.random() * 200 + 300)
 
         let kulki = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
         let szanse = []
@@ -37,7 +37,7 @@ exports.run = (client) => {
                 .setStyle(ButtonStyle.Primary)
         )
         
-        client.channels.cache.get('1143955040999067789').send({
+        client.channels.cache.get('1123341676895809686').send({
             content: `Dzika kulka dropnęła`,
             files: [link],
             components: [przycisk]
@@ -103,9 +103,7 @@ exports.run = (client) => {
                         files: [link],
                         components: [przycisk]
                 })}
-            }, 30000);
-                
-
+            }, 7200000);
         })
     }
 }

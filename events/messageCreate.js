@@ -3,7 +3,7 @@ const kulkiDrop = require('./../ballsDatabase/kulkiDrop.js')
 
 module.exports = (client, message) => {
   if(message.author.bot && message.author.id != '1102896148336885811') return;
-  if(message.guild.id == '1094901377731403866') kulkiDrop.run(client)
+  if(message.guild.id == '916357080754040833') kulkiDrop.run(client)
   if(message.content == '!bill') message.channel.send('po to boźa dała ręC żebyś sam se użył komNdy')
   if(message.content[0] !== "&" && !message.content.startsWith("k!")) return;
 
@@ -15,13 +15,19 @@ module.exports = (client, message) => {
 
   
   if(message.content.startsWith('&')){
+    if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'dodaj') &&
+      !(message.guild.id == '1094901377731403866' || message.guild.id == '874212818176593930' || message.guild.id == '874357478672969768')){
+        message.channel.send("ta KO[menda] może działać tylko na wybranych serwerach")
+        return
+    }
+
     if((polecenie == 'usuń' || polecenie == 'zweryfikuj') && !(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
       message.channel.send("co wolno wojewoDŹe to ńe Tobie")
       return
     }
 
     if(polecenie.startsWith('zz') && message.author.id != '691720485343592469'){
-      message.channel.send("komNda zbyt potężna dla zwykłego śmiertLńka")
+      message.channel.send("KO[menda] zbyt potężna dla zwykłego śmiRtLńK")
       return
     }
 

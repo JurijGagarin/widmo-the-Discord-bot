@@ -6,15 +6,28 @@ exports.run = (client, message, argumenty) => {
     rok = argumenty[0]
 
     for(let klucz in dane){
-        if(!klucz.startsWith(rok)) continue
+        if(!klucz.startsWith(`${rok}`)) continue
 
-        klucz = klucz.split(' ')
-        klucz[1] += '-' + klucz.pop()
-        klucz = klucz.join(' ')
-        message.content = `&tabela pingi ${klucz}`
+        if(!klucz.endsWith('i')){
+            klucz = klucz.split(' ')
+            klucz[1] += '-' + klucz.pop()
+            klucz = klucz.join(' ')
 
-        mc(client, message)
-        message.channel.send(':arrow_up: ' + klucz + ' :arrow_up:')
+            message.content = `&tabela pingi ${klucz}`
+            mc(client, message)
+            message.channel.send(':arrow_up: ' + klucz + ' :arrow_up:')
+        }
+        else{
+            var output = ''
+            let konkursy = JSON.parse(dane[klucz])
+            for(let k = 0; k < konkursy.length; k++){
+                if(konkursy[k]){
+                    if(konkursy[k].pozycja != -1) output += `${konkursy[k].pozycja} . <@${konkursy[k].id}>\n`
+                    else if(konkursy[k].pozycja == -1) output += `<:DSQ:874279963841400833> <@${konkursy[k].id}>\n`
+                }
+            }
+            output != '' ? message.reply(output) : message.reply('tabLa jSt pusta') 
+        }
     }
 
     let turnieje = ['k3', 'tcp', 'wt', 'ps', 'pt', 'wk', 'vc', 'tdw']
