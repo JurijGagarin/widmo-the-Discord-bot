@@ -48,6 +48,7 @@ exports.run = (typ, seria, pozycja) => {
 
     case "mn1":
       if(pozycja >= 1) i = 120 - pozycja * 20;
+      if(pozycja >= 4) i = 90 - pozycja * 10;
       if(pozycja >= 6) i = 0;
       if(pozycja == -1) i = 0;
       break;

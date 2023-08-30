@@ -27,7 +27,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   let bool4 = typ == 'mś' && seriaN > 4
   let bool3 = ['tcp', 'mśwl'].includes(typ) && seriaN > 3
   let bool2 = ['ps', 'io'].includes(typ) && seriaN > 2
-  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'wk', 'vc'].includes(typ) && seriaN > 1
+  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'wk', 'vc', 'mn', 'ind', 'druż', 'duety'].includes(typ) && seriaN > 1
   if(bool1 || bool2 || bool3 || bool4){
     message.channel.send('zbyt wysoki numR sRii')
     return
