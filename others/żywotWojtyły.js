@@ -77,7 +77,7 @@ exports.run = (konkursy, użytkownicy, channel, typ, rokS) => {
       }
       var context = canvas.getContext('2d');
       context.fillStyle = "white";
-      context.font = "Regular 400 140px Lilita One";
+      context.font = "140px Lilita One";
 
 
       const rysujAwatar = (x, y, r, margines, img) => {
@@ -196,7 +196,7 @@ exports.run = (konkursy, użytkownicy, channel, typ, rokS) => {
       }
 
       if(['tdw', 'pt', 'vc', 'wk'].includes(typ) && i == 0){
-        context.font = "Regular 400 100px Lilita One";
+        context.font = "100px Lilita One";
         context.textAlign = "center"
         context.fillText(`${rokS[1]}\n${rokS[2]}\n${rokS[3]}`, 2818, 756);
       }
