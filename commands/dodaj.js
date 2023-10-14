@@ -105,7 +105,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   var drużynyJSON = JSON.stringify(drużyny)
   var hasło = ''
   var dzw = 'do zweryfikowania - - - - - '
-  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers && !message.author.id == '691720485343592469')) hasło += dzw
+  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && !message.author.id == '691720485343592469') hasło += dzw
   hasło += rok + ' ' + typ + ' ' + dzień
   
   
