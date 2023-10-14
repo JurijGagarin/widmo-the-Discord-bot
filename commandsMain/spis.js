@@ -13,8 +13,13 @@ exports.run = (client, message, argumenty) => {
   }
   else{
     var b = ''
-    for(let j in a) b += a[j] +'\n'
-    message.reply(b)
+    for(let j in a){
+      b += a[j] +'\n'
+      if(b.length > 1950 || j == a.length - 1){
+        message.channel.send(b)
+        b = ''
+      }
+    }
   }
 }
 
