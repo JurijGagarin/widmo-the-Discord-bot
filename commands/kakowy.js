@@ -1,8 +1,8 @@
 exports.run = (client, message, argumenty) => {
-  var tekst = argumenty.join(' ')
+  var tekst = ' ' + argumenty.join(' ')
   var tekstOst = ''
-  var znajdź = [' nad', ' od', ' pod', ' ponad', ' przed', ' trans', ' eks', ' cis', ' dys', ' seks', ' dez', ' dyz', ' roz', 'erz', 'eni', 'esi', 'esz', 'be', 'ce', 'de', 'ef', 'gie', 'ha', 'jot', 'ka', 'el', 'eł', 'em', 'en', 'er', 'es', 'te', 'wu', 'iks', 'igrek', 'zet', 'cha', 'czy', 'dzy', 'dzi', 'dży', 'szy', 'eń', 'eś', 'żet', 'ci', 'ni', 'si', 'zi', 'pi']
-  var zamień = [' nad', ' od', ' pod', ' ponad', ' przed', ' trans', ' eks', ' cis', ' dys', ' seks', ' dez', ' dyz', ' roz', 'erz', 'eni', 'esi', 'esz', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ł', 'M', 'N', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z', 'CH', 'CZ', 'DZ', 'DŹ', 'DŻ', 'SZ', 'Ń', 'Ś', 'Ż', 'ć', 'ń', 'ś', 'ź', 'π']
+  var znajdź = [' nad', ' od', ' pod', ' ponad', ' przed', ' trans', ' eks', ' cis', ' dys', ' seks', ' dez', ' dyz', ' roz', ' nie', 'erz', 'eni', 'esi', 'esz', 'be', 'ce', 'de', 'ef', 'gie', 'ha', 'jot', 'ka', 'el', 'eł', 'em', 'en', 'er', 'es', 'te', 'wu', 'iks', 'igrek', 'zet', 'cha', 'czy', 'dzy', 'dzi', 'dży', 'szy', 'eń', 'eś', 'żet', 'ci', 'ni', 'si', 'zi', 'pi']
+  var zamień = [' nad', ' od', ' pod', ' ponad', ' przed', ' trans', ' eks', ' cis', ' dys', ' seks', ' dez', ' dyz', ' roz', ' ńe', 'erz', 'eni', 'esi', 'esz', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ł', 'M', 'N', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z', 'CH', 'CZ', 'DZ', 'DŹ', 'DŻ', 'SZ', 'Ń', 'Ś', 'Ż', 'ć', 'ń', 'ś', 'ź', 'π']
 
   for(let i = 0; i < tekst.length; i++){
     let znaleziono = false
@@ -16,8 +16,8 @@ exports.run = (client, message, argumenty) => {
     }
     if(znaleziono == false) tekstOst += tekst[i]
   }
-  tekstOst == '' ? 'brak Tkstu' : 0
-  message.reply(tekstOst)
+  tekstOst == (' ' || '') ? 'brak Tkstu' : 0
+  message.reply(tekstOst.slice(1))
 }
 
 exports.name = "kakowy";
