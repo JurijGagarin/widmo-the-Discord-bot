@@ -29,7 +29,7 @@ exports.run = (client, message, argumenty) => {
         emoji: '<:' + resztaPromptu[0],
         imgDrop: resztaPromptu[1],
         imgInfo: resztaPromptu[2],
-        gwiazdki: +argumenty[3]
+        gwiazdki: +resztaPromptu[3]
     })
     fs.writeFileSync('./databaseBalls/listaKulekDB.json', JSON.stringify(daneKulek))
     message.reply(`pomyślnie dodano kulkę`)
