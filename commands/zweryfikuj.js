@@ -7,8 +7,23 @@ exports.run = (client, message, argumenty) => {
   }
 
   var hasło = 'do zweryfikowania - - - - - '
-  hasło += argumenty.join(' ')
+  var neuhasło = argumenty.join(' ')
+  hasło += neuhasło
 
+  var lista = db.list(hasło)
+  if(lista.length == 0){
+    message.channel.send('ńe ma czego wRyfikować')
+    return
+  }
+  for(let i = 0; i < lista.length; i++){
+    let value = db.get(lista[i])
+    if(value != null && typeof value != 'undefined') {
+      let hasłoEl = neuhasło + lista[i].slice(hasło.length)
+      db.set(hasłoEl, value)
+      db.del(lista[i])
+    }
+  }
+/*
   const getset = (rodzaj) => {
     value = db.get(hasło + ' ' + rodzaj)
     if(value != null && typeof value != 'undefined') {
@@ -21,7 +36,7 @@ exports.run = (client, message, argumenty) => {
   getset('n')
   getset('t')
   getset('d')
-
+*/
   message.reply('konQrsy zwRyfikowano pomyślńe')
 }
 
