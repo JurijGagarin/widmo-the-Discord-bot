@@ -8,7 +8,7 @@ exports.run = (client, message, argumenty) => {
         return
     }
 
-    let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+    let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
     let link = argumenty.shift()
     let znaleziono = false
     for(let element = 0; element < daneKulek.length; element++){
@@ -17,7 +17,7 @@ exports.run = (client, message, argumenty) => {
             daneKulek[element].imgInfo = link
         }
     }
-    fs.writeFileSync('./ballsDatabase/listaKulekDB.json', JSON.stringify(daneKulek))
+    fs.writeFileSync('./databaseBalls/listaKulekDB.json', JSON.stringify(daneKulek))
 
     if(!znaleziono){
         message.reply(`nie znaleziono takiej kulki w systemie`)

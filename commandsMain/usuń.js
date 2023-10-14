@@ -1,4 +1,4 @@
-const db = require('./../database/db.js')
+const db = require('./../databaseMain/db.js')
 const dodaj = require('./dodaj.js')
 
 exports.run = (client, message, argumenty) => {

@@ -9,7 +9,7 @@ exports.run = (client, message, argumenty) => {
     }
 
 
-    let dane = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+    let dane = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
     let output = ''
     dane.sort((a, b) => {return a.gwiazdki < b.gwiazdki})
     for(let el in dane){

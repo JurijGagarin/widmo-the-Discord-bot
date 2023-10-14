@@ -1,4 +1,4 @@
-const db = require('./../database/db.js')
+const db = require('./../databaseMain/db.js')
 const żywotWojtyły = require("./../others/żywotWojtyły.js")
 const skokowa = require("./../others/skokowa.js")
 const messageCreate = require('../events/messageCreate.js')

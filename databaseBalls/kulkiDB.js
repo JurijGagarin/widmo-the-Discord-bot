@@ -1,6 +1,6 @@
 const fs = require('fs')
-var link = './ballsDatabase/kulkiUżytkownikówDB.json'
-var linkK = './ballsDatabase/listaKulekDB.json'
+var link = './databaseBalls/kulkiUżytkownikówDB.json'
+var linkK = './databaseBalls/listaKulekDB.json'
 
 
 

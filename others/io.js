@@ -1,4 +1,4 @@
-const db = require('./../database/db.js')
+const db = require('../databaseMain/db.js')
 
 exports.run = (hasło, zawodnicyJSON, seria, usunąć, channel) => {
   db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, channel)

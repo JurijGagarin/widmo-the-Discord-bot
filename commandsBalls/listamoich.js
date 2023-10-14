@@ -2,8 +2,8 @@ const { EmbedBuilder } = require('discord.js');
 const fs = require('fs')
 
 exports.run = (client, message, argumenty) => {
-    let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
-    let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+    let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
+    let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
 
     let uniq = [...new Set(daneUżytkowników[message.author.id])];
     let output = `Zdobyto ${uniq.length} z ${daneKulek.length}, czyli **${Math.round(uniq.length/daneKulek.length*100)}%**\n`

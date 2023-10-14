@@ -1,8 +1,8 @@
 const fs = require('fs')
 
 exports.run = (client, message, argumenty) => {
-    let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
-    let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+    let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
+    let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
     let znaleziono = false
     let [ping, ...nazwa] = argumenty
     nazwa = nazwa.join(' ')
@@ -14,7 +14,7 @@ exports.run = (client, message, argumenty) => {
             daneUżytkowników[idBiorcy].push(element)
             let index = daneUżytkowników[message.author.id].indexOf(element)
             daneUżytkowników[message.author.id].splice(index, 1)
-            fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
+            fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
             message.reply(`Pomyślnie przekazano **${daneKulek[element].nazwa}** użytkownikowi ${ping}`)
         }
     })

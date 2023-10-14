@@ -2,7 +2,7 @@ const fs = require('fs')
 const mc = require('./../events/messageCreate.js')
 
 exports.run = (client, message, argumenty) => {
-    let dane = JSON.parse(fs.readFileSync('./database/bazaDanych.json'))
+    let dane = JSON.parse(fs.readFileSync('./databaseMain/bazaDanych.json'))
     rok = argumenty[0]
 
     for(let klucz in dane){

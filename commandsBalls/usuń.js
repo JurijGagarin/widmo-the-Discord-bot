@@ -8,8 +8,8 @@ exports.run = (client, message, argumenty) => {
         return
     }
 
-    let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
-    let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
+    let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
+    let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
     let znaleziono = false
     for(let element = 0; element < daneKulek.length; element++){
         if(daneKulek[element].nazwa.toLowerCase() == argumenty.join(' ').toLowerCase() && !znaleziono){
@@ -22,8 +22,8 @@ exports.run = (client, message, argumenty) => {
             
         }
     }
-    fs.writeFileSync('./ballsDatabase/listaKulekDB.json', JSON.stringify(daneKulek))
-    fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
+    fs.writeFileSync('./databaseBalls/listaKulekDB.json', JSON.stringify(daneKulek))
+    fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
 
     if(!znaleziono){
         message.reply(`nie znaleziono takiej kulki w systemie`)

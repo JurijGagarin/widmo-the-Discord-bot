@@ -22,7 +22,7 @@ exports.run = (client) => {
         client.kulkiCzas = Date.now()
         client.kulkiPróg = Math.floor(Math.random() * 200 + 300)
 
-        let kulki = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+        let kulki = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
         let szanse = []
         for(let i in kulki) for(let j = 0; j < 6 - kulki[i].gwiazdki; j++) szanse.push(i)
         let nrPolosowanejKulki = szanse[Math.floor(Math.random() * szanse.length)]
@@ -79,10 +79,10 @@ exports.run = (client) => {
                                 })
                                 interaction.reply(`Brawo <@${interaction.user.id}>, dodano **${polosowanaKulka.nazwaB}** do Twojej kolekcji`)
                                 
-                                let dane = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
+                                let dane = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
                                 if(typeof dane[interaction.user.id] == 'undefined') dane[interaction.user.id] = []
                                 dane[interaction.user.id].push(nrPolosowanejKulki)
-                                fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(dane))
+                                fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(dane))
                             }
                             else{
                                 interaction.reply(`<@${interaction.user.id}>, kulka została już złapana`)

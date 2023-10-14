@@ -1,20 +1,19 @@
 const { PermissionsBitField } = require('discord.js');
-const kulkiDrop = require('./../ballsDatabase/kulkiDrop.js')
+const kulkiDrop = require('../databaseBalls/kulkiDrop.js')
 
 module.exports = (client, message) => {
   if(message.author.bot && message.author.id != '1102896148336885811') return;
   if(message.guild.id == '916357080754040833') kulkiDrop.run(client)
   if(message.content == '!bill') message.channel.send('po to boźa dała ręC żebyś sam se użył komNdy')
-  if(message.content[0] !== "&" && !message.content.startsWith("k!")) return;
 
   var argumenty = message.content.toLowerCase().trim().split(/\s+/);
   argumenty = argumenty.filter(element => element !== '');
   var polecenie = argumenty.shift()
-  if(polecenie.startsWith('&')) polecenie = polecenie.slice(1)
-  else if (polecenie.startsWith('k!')) polecenie = polecenie.slice(2)
-
   
-  if(message.content.startsWith('&')){
+
+
+  if(polecenie[0] == '&'){
+    polecenie = polecenie.slice(1)
     if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'dodaj') &&
       !(message.guild.id == '1094901377731403866' || message.guild.id == '874212818176593930' || message.guild.id == '874357478672969768')){
         message.channel.send("ta KO[menda] może działać tylko na wybranych serwerach")
@@ -96,20 +95,42 @@ module.exports = (client, message) => {
     if(polecenie == 'spis' && sprDł(1, 4)) return
     if(polecenie == 'staty' && sprDł(2, 2)) return
 
-    const cmd = client.commands.get(polecenie);
+    const cmd = client.commandsMain.get(polecenie);
     if (!cmd){
       message.channel.send("ńe ma takiej komNdy RomQ")
       return;
     }
     cmd.run(client, message, argumenty, false)
   }
-  else if(message.content.startsWith('k!')){
+
+
+
+  else if(polecenie.startsWith('k!')){
+    polecenie = polecenie.slice(2)
     const cmd = client.commandsKulki.get(polecenie);
     if (!cmd){
       message.channel.send("Nie ma takiej komendy. Użyj k!pomoc jeśli nie wiesz co wpisać")
       return;
     }
     cmd.run(client, message, argumenty)
+  }
+
+
+
+  else if(polecenie.startsWith('p!')){
+    polecenie = polecenie.slice(2)
+    const cmd = client.commandsFun.get(polecenie);
+    if (!cmd){
+      message.channel.send("ńe ma takiej komNdy. Użyj &pomoc jeśli ńe wiesz co wpisać")
+      return;
+    }
+    cmd.run(client, message, argumenty)
+  }
+
+
+  
+  else{
+    return
   }
 };
 

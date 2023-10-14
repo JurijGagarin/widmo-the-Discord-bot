@@ -9,7 +9,7 @@ zgoda[0] = false
 zgoda[1] = false
 
 const nadpiszDeck = (nr, embed) => {
-  let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+  let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
   if(decki[nr].length == 0){
     embed.data.fields[nr].value = '*jeszcze tu jest pusto*'
   }
@@ -26,8 +26,8 @@ const nadpisz = (embed) => {
 }
 
 const daj = (nazwa, m, id1, nr) => {
-  let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
-  let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+  let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
+  let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
   let znaleziono = false
   daneUżytkowników[id1].forEach(element => {
     if((daneKulek[element].nazwa.toLowerCase() == nazwa || daneKulek[element].nazwaB.toLowerCase() == nazwa) && znaleziono == false){
@@ -35,7 +35,7 @@ const daj = (nazwa, m, id1, nr) => {
       decki[nr].push(element)
       let index = daneUżytkowników[id1].indexOf(element)
       daneUżytkowników[id1].splice(index, 1)
-      fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
+      fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
     }
   })
 
@@ -43,8 +43,8 @@ const daj = (nazwa, m, id1, nr) => {
 }
 
 const usuń = (nazwa, m, id, nrdawcy) => {
-  let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
-  let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+  let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
+  let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
   let znaleziono = false
 
   for(let element = 0;  element < daneKulek.length; element++){
@@ -53,7 +53,7 @@ const usuń = (nazwa, m, id, nrdawcy) => {
       daneUżytkowników[id].push(element)
       let index = decki[nrdawcy].indexOf(element)
       decki[nrdawcy].splice(index, 1)
-      fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
+      fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
     }
   }
 
@@ -93,14 +93,14 @@ const anuluj = (msg, embed) => {
 }
 
 const zatwierdź = (msg, id1, id2) => {
-  let daneUżytkowników = JSON.parse(fs.readFileSync('./ballsDatabase/kulkiUżytkownikówDB.json'))
+  let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
   decki[0].forEach(el => {
     daneUżytkowników[id2].push(el)
   })
   decki[1].forEach(el => {
     daneUżytkowników[id1].push(el)
   })
-  fs.writeFileSync('./ballsDatabase/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
+  fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(daneUżytkowników))
   msg.reply(`pomyślnie przeprowadzono wymianę`)
 }
 

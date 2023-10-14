@@ -8,7 +8,7 @@ exports.run = (client, message, argumenty) => {
         return
     }
 
-    let daneKulek = JSON.parse(fs.readFileSync('./ballsDatabase/listaKulekDB.json'))
+    let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
     let prompt = argumenty.join(' ')
     let czudzysłowy = []
     for(let i = 0; i < prompt.length; i++){
@@ -31,7 +31,7 @@ exports.run = (client, message, argumenty) => {
         imgInfo: resztaPromptu[2],
         gwiazdki: +argumenty[3]
     })
-    fs.writeFileSync('./ballsDatabase/listaKulekDB.json', JSON.stringify(daneKulek))
+    fs.writeFileSync('./databaseBalls/listaKulekDB.json', JSON.stringify(daneKulek))
     message.reply(`pomyślnie dodano kulkę`)
 }
 
