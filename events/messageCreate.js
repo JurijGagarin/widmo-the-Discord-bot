@@ -11,8 +11,10 @@ module.exports = (client, message) => {
   var polecenie = argumenty.shift()
   
 
-
-  if(polecenie[0] == '&'){
+  if(typeof polecenie == 'undefined'){
+    return
+  }
+  else if(polecenie[0] == '&'){
     polecenie = polecenie.slice(1)
     if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'dodaj') &&
       !(message.guild.id == '1094901377731403866' || message.guild.id == '874212818176593930' || message.guild.id == '874357478672969768')){
@@ -107,7 +109,7 @@ module.exports = (client, message) => {
 
   else if(polecenie.startsWith('k!')){
     polecenie = polecenie.slice(2)
-    const cmd = client.commandsKulki.get(polecenie);
+    const cmd = client.commandsBalls.get(polecenie);
     if (!cmd){
       message.channel.send("Nie ma takiej komendy. Użyj k!pomoc jeśli nie wiesz co wpisać")
       return;

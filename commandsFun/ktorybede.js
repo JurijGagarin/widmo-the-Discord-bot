@@ -4,7 +4,7 @@ exports.run = (client, message, argumenty) => {
   if(los > 25) efekt = 'DSQ'
   if(los > 33) efekt = 'ostatni z DSQ'
   if(los > 34) efekt = 'DNS'
-  message.channel.send(efekt)
+  message.reply(efekt)
 }
 
 exports.name = "ktorybede";
