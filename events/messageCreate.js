@@ -6,7 +6,7 @@ module.exports = (client, message) => {
   if(message.guild.id == '916357080754040833') kulkiDrop.run(client)
   if(message.content == '!bill') message.channel.send('po to boźa dała ręC żebyś sam se użył komNdy')
 
-  if(message.contetnt.startsWith('k!dodaj')) var argumenty = message.content.trim().split(/\s+/);
+  if(message.content.startsWith('k!dodaj')) var argumenty = message.content.trim().split(/\s+/);
   else var argumenty = message.content.toLowerCase().trim().split(/\s+/);
   argumenty = argumenty.filter(element => element !== '');
   var polecenie = argumenty.shift()
