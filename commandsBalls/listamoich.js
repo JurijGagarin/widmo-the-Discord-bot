@@ -5,6 +5,11 @@ exports.run = (client, message, argumenty) => {
     let daneUżytkowników = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
     let daneKulek = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
 
+    if(typeof daneUżytkowników[message.author.id] == 'undefined'){
+        message.reply('nie masz żadnych kulek')
+        return
+    }
+
     let uniq = [...new Set(daneUżytkowników[message.author.id])];
     let output = `Zdobyto ${uniq.length} z ${daneKulek.length}, czyli **${Math.round(uniq.length/daneKulek.length*100)}%**\n`
     daneUżytkowników[message.author.id].sort((a, b) => {return a.gwiazdki < b.gwiazdki})
