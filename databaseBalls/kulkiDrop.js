@@ -24,7 +24,7 @@ exports.run = (client) => {
 
         let kulki = JSON.parse(fs.readFileSync('./databaseBalls/listaKulekDB.json'))
         let szanse = []
-        for(let i in kulki) for(let j = 0; j < 6 - kulki[i].gwiazdki; j++) szanse.push(i)
+        for(let i in kulki) for(let j = 0; j < 7 - kulki[i].gwiazdki; j++) szanse.push(i)
         let nrPolosowanejKulki = szanse[Math.floor(Math.random() * szanse.length)]
         let polosowanaKulka = kulki[nrPolosowanejKulki]
         let link = polosowanaKulka.imgDrop
