@@ -103,7 +103,7 @@ exports.run = (client) => {
                         files: [link],
                         components: [przycisk]
                 })}
-            }, 7200000);
+            }, 600000);
         })
     }
 }
