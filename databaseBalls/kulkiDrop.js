@@ -44,66 +44,85 @@ exports.run = (client) => {
         }).then(message => {
             let złapano = false
 
-            client.on(Events.InteractionCreate, (interaction) => {
-                if (interaction.customId === 'łapże-przycisk'){
-                    const modal = new ModalBuilder()
-                        .setCustomId('łapże-modal')
-                        .setTitle('Zgadnij nazwę kulki')
-                        .addComponents([
-                        new ActionRowBuilder().addComponents(
-                            new TextInputBuilder()
-                                .setCustomId('łapże-modal-input')
-                                .setLabel('Twój strzał')
-                                .setStyle(TextInputStyle.Short)
-                                .setPlaceholder('Tu wpisz swój strzał')
-                                .setRequired(true),
-                            ),
-                        ]);
-                
-                    interaction.showModal(modal);
+            function zamek() {
+                try{
+                    if(!złapano){
+                        przycisk.components[0].setDisabled(true)
+                        message.edit({
+                            content: `Dzika kulka dropnęła\nUpłynął czas na jej zgadnięcie, prawidłowa odpowiedź brzmi **${polosowanaKulka.nazwa}**`,
+                            files: [link],
+                            components: [przycisk]
+                    })}
+                } catch (error) {
+                    client.channels.cache.get('1095399742051201135').send({
+                        content: 'błąd zamku: ' + error.slice(0, 1950)
+                    })
                 }
-            
+            }
 
-                if (interaction.type === InteractionType.ModalSubmit) {
-                    if (interaction.customId === 'łapże-modal') {
-                        const odpowiedź = interaction.fields.getTextInputValue('łapże-modal-input')
+            try{
+                client.on(Events.InteractionCreate, (interaction) => {
+                    if (interaction.customId === 'łapże-przycisk'){
+                        const modal = new ModalBuilder()
+                            .setCustomId('łapże-modal')
+                            .setTitle('Zgadnij nazwę kulki')
+                            .addComponents([
+                            new ActionRowBuilder().addComponents(
+                                new TextInputBuilder()
+                                    .setCustomId('łapże-modal-input')
+                                    .setLabel('Twój strzał')
+                                    .setStyle(TextInputStyle.Short)
+                                    .setPlaceholder('Tu wpisz swój strzał')
+                                    .setRequired(true),
+                                ),
+                            ]);
+                    
+                        interaction.showModal(modal);
+                    }
 
-                        if(odpowiedź.toLowerCase() == polosowanaKulka.nazwa.toLowerCase()){
-                            if(!złapano){
-                                złapano = true
-                                przycisk.components[0].setDisabled(true)
-                                message.edit({
-                                    content: `Dzika kulka dropnęła\nKulka złapana przez użytkownika <@${interaction.user.id}>`,
-                                    files: [link],
-                                    components: [przycisk]
-                                })
-                                interaction.reply(`Brawo <@${interaction.user.id}>, dodano **${polosowanaKulka.nazwaB}** do Twojej kolekcji`)
-                                
-                                let dane = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
-                                if(typeof dane[interaction.user.id] == 'undefined') dane[interaction.user.id] = []
-                                dane[interaction.user.id].push(nrPolosowanejKulki)
-                                fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(dane))
+                    client.channels.cache.get('1095399742051201135').send({
+                        content: 'HEMOS PASADO'
+                    })
+                
+
+                    if (interaction.type === InteractionType.ModalSubmit) {
+                        if (interaction.customId === 'łapże-modal') {
+                            const odpowiedź = interaction.fields.getTextInputValue('łapże-modal-input')
+
+                            if(odpowiedź.toLowerCase() == polosowanaKulka.nazwa.toLowerCase()){
+                                if(!złapano){
+                                    złapano = true
+                                    przycisk.components[0].setDisabled(true)
+                                    message.edit({
+                                        content: `Dzika kulka dropnęła\nKulka złapana przez użytkownika <@${interaction.user.id}>`,
+                                        files: [link],
+                                        components: [przycisk]
+                                    })
+                                    interaction.reply(`Brawo <@${interaction.user.id}>, dodano **${polosowanaKulka.nazwaB}** do Twojej kolekcji`)
+                                    
+                                    let dane = JSON.parse(fs.readFileSync('./databaseBalls/kulkiUżytkownikówDB.json'))
+                                    if(typeof dane[interaction.user.id] == 'undefined') dane[interaction.user.id] = []
+                                    dane[interaction.user.id].push(nrPolosowanejKulki)
+                                    fs.writeFileSync('./databaseBalls/kulkiUżytkownikówDB.json', JSON.stringify(dane))
+                                }
+                                else{
+                                    interaction.reply(`<@${interaction.user.id}>, kulka została już złapana`)
+                                }
                             }
                             else{
-                                interaction.reply(`<@${interaction.user.id}>, kulka została już złapana`)
+                                interaction.reply(`<@${interaction.user.id}> zła odpowiedź, próbuj dalej`)
                             }
                         }
-                        else{
-                            interaction.reply(`<@${interaction.user.id}> zła odpowiedź, próbuj dalej`)
-                        }
                     }
-                }
-            })
+                })
+            } catch (error){
+                client.channels.cache.get('1095399742051201135').send({
+                    content: 'błąd modalu: ' + error.slice(0, 1950)
+                })
+                zamek()
+            }
 
-            setTimeout(function () {
-                if(!złapano){
-                    przycisk.components[0].setDisabled(true)
-                    message.edit({
-                        content: `Dzika kulka dropnęła\nUpłynął czas na jej zgadnięcie, prawidłowa odpowiedź brzmi **${polosowanaKulka.nazwa}**`,
-                        files: [link],
-                        components: [przycisk]
-                })}
-            }, 600000);
+            setTimeout(zamek, 600000);
         })
     }
 }
