@@ -43,7 +43,7 @@ module.exports = (client, message) => {
     const wiad = (info) => message.channel.send(`wszystkie ślady wsKzują na to, że argumNt na miejscu ${info} ńe jSt liczbą`) 
 
     const isT = (typ) => {
-      return ['ind', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'io', 'mś', 'mśwl', 'pt', 'wk', 'vc', 'tdw', 'mn'].includes(typ) || (typeof typ == 'undefined')
+      return ['ind', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'io', 'mś', 'mśwl', 'pt', 'wk', 'vc', 'tdw', 'mn', "tcp'62", "k3'22"].includes(typ) || (typeof typ == 'undefined')
     }
 
     const sprParam = () => {
@@ -77,13 +77,13 @@ module.exports = (client, message) => {
       return
     }
 
-    if(polecenie == 'tabela' && (argumenty[0] == 's' || argumenty[0] == 'żw')){
+    /*if(polecenie == 'tabela' && (argumenty[0] == 's' || argumenty[0] == 'żw')){
       if(!(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
         message.channel.send('ze względu niskie moce przerobowe bota obecnie uprawnienia do używania tego wzoru ma wyłącznie administracja, ażeby używać go do oficjalnych tabel')
         return
       }
       else message.channel.send('to może chwilę potrwać')
-    }
+    }*/
 
     const sprDł = (min, max) => {
       let długość = argumenty.length

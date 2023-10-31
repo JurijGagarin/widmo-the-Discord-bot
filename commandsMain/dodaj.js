@@ -1,6 +1,6 @@
 const db = require('../databaseMain/db.js')
 const punktacja = require("../others/punktacja.js")
-const tcp = require("../others/tcp.js")
+const tcp = require("../others/tcp'62.js")
 const io = require("../others/io.js")
 const vc = require("../others/vc.js")
 const { PermissionsBitField, VoiceChannel } = require('discord.js');
@@ -14,7 +14,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   var małpyPrzed = 0;
   for(let litera in wyniki[0]) wyniki[0][litera] == "@" ? małpyPrzed++ : 0
 
-  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && !message.author.id == '691720485343592469' && ['mś', 'mśwl', 'io', 'tcp', 'ps'].includes(typ)){
+  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && !message.author.id == '691720485343592469' && ["tcp'62"].includes(typ)){
     message.channel.send('ńe masz uprawńŃ do dodawańa Tgo typu konQrsów')
     return
   }
@@ -25,9 +25,9 @@ exports.run = (client, message, argumenty, usunąć) => {
 
   let seriaN = +seria
   let bool4 = typ == 'mś' && seriaN > 4
-  let bool3 = ['tcp', 'mśwl'].includes(typ) && seriaN > 3
+  let bool3 = ["tcp'62", 'mśwl'].includes(typ) && seriaN > 3
   let bool2 = ['ps', 'io'].includes(typ) && seriaN > 2
-  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'wk', 'vc', 'mn', 'ind', 'druż', 'duety'].includes(typ) && seriaN > 1
+  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'tcp', 'wk', 'vc', 'mn', 'ind', 'druż', 'duety', "k3'22"].includes(typ) && seriaN > 1
   if(bool1 || bool2 || bool3 || bool4){
     message.channel.send('zbyt wysoki numR sRii')
     return
@@ -60,7 +60,7 @@ exports.run = (client, message, argumenty, usunąć) => {
     if(zawodnicy[i].kraj == 'bezpaństwowiec') message.channel.send(`${message.mentions.members.first(i+1)[i].user.username} ńe pośada roli państwa bądź ńe jSt ona na liśçe`)
 
   
-    if(['ind', 'k3', 'wt', 'ps', 'wk', 'tdw', 'pt'].some(el => el == typ)){
+    if(['ind', 'k3', 'wt', 'ps', 'wk', 'tdw', 'pt', 'tcp', "k3'62"].some(el => el == typ)){
       let znaleziono = false
       for(let j in drużyny){
       	if(drużyny[j].nazwa == zawodnicy[i].kraj){
@@ -110,7 +110,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   hasło += rok + ' ' + typ + ' ' + dzień
   
   
-  if(['ind', 'k3', 'wt', 'wk', 'tdw', 'pt'].some(el => el == typ)){
+  if(['ind', 'k3', 'wt', 'tcp', 'wk', 'tdw', 'pt', "k3'22",].some(el => el == typ)){
     db.set(hasło + ' i', zawodnicyJSON, message.channel)
     db.set(hasło + ' n', drużynyJSON, message.channel)
   }
@@ -127,7 +127,7 @@ exports.run = (client, message, argumenty, usunąć) => {
     vc.run(hasło, drużyny, drużynyVC, zawodnicyJSON, message.channel)
   }
 
-  if(typ == 'tcp'){
+  if(typ == "tcp'62"){
     tcp.run(hasło, seria, zawodnicyJSON, usunąć, message.channel)
   }
 

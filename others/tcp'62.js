@@ -1,5 +1,5 @@
 const db = require('../databaseMain/db.js')
-const punktacja = require("./../others/punktacja.js")
+const punktacja = require("./punktacja.js")
 
 exports.run = (hasło, seria, zawodnicyJSON, usunąć, channel) => {
   db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, channel)
@@ -40,7 +40,7 @@ exports.run = (hasło, seria, zawodnicyJSON, usunąć, channel) => {
     else{
       for(let j = 0; j < serie[2].length; j++){
         if(serie[2][j].pozycja == -1) break
-        serie[2][j].punkty = punktacja.run('tcp', '2', j+1)
+        serie[2][j].punkty = punktacja.run("tcp'62", '2', j+1)
         serie[2][j].pozycja = j + 1
       }
 
@@ -113,7 +113,7 @@ exports.run = (hasło, seria, zawodnicyJSON, usunąć, channel) => {
     else{
       for(let j = 0; j < serie[3].length; j++){
         if(serie[3][j].pozycja == -1) break
-        serie[3][j].punkty = punktacja.run('tcp', '2', j+1)
+        serie[3][j].punkty = punktacja.run("tcp'62", '2', j+1)
         serie[3][j].pozycja = j + 1
       }
 
@@ -175,7 +175,7 @@ exports.run = (hasło, seria, zawodnicyJSON, usunąć, channel) => {
 
 
     for(let j = 0; j < serie[2].length; j++){
-      serie[2][j].punkty = punktacja.run('tcp', '4', j+1)
+      serie[2][j].punkty = punktacja.run("tcp'62", '4', j+1)
       serie[2][j].pozycja = j + 1
     }
 

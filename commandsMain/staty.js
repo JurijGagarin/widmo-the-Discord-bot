@@ -8,8 +8,8 @@ exports.run = (client, message, argumenty) => {
   for(let i in trafienia){
     let trafienia2 = trafienia[i].split(' ')
     let if1 = trafienia[i].endsWith('i')
-    let if2 = trafienia2[1] == 'tcp' || trafienia2[1] == 'ps'
-    let if3 = trafienia[i].endsWith('ps 1 t') || (trafienia2[1] == 'tcp' && (trafienia2[3] == '1' || trafienia2[3] == '2'))
+    let if2 = trafienia2[1] == "tcp'62" || trafienia2[1] == 'ps'
+    let if3 = trafienia[i].endsWith('ps 1 t') || (trafienia2[1] == "tcp'62" && (trafienia2[3] == '1' || trafienia2[3] == '2'))
     let if4 = if2 && trafienia[i].endsWith('i')
     let c1 = parametr == 'dsq'
     let c2 = parametr == 'p1' || parametr == 'top3'

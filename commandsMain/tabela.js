@@ -18,9 +18,9 @@ exports.run = (client, message, argumenty) => {
     return
   }
   if(rodzaj == ''){
-    if(['ind', 'k3', 'wt', 'ps', 'pt', 'wk', 'vc', 'tdw'].some(el => el == typ)) rodzaj = 'i'
+    if(['ind', 'k3', 'wt', 'ps', 'tcp', 'pt', 'wk', 'vc', 'tdw', "k3'22"].some(el => el == typ)) rodzaj = 'i'
     if(typ == 'druż' || typ == 'duety') rodzaj = 'n'
-    if(typ == 'tcp' || typ == 'mn') rodzaj = 't'
+    if(typ == "tcp'62" || typ == 'mn') rodzaj = 't'
     if((typ == 'io' || typ == 'mś' || typ == 'mśwl') && dzień == 1) rodzaj = 'd'
     if((typ == 'io' || typ == 'mś' || typ == 'mśwl') && dzień != 1) rodzaj = 't'
   }

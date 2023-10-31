@@ -4,12 +4,12 @@ exports.run = (typ, seria, pozycja) => {
   seria = seria.toString();
   switch(typ+seria){
     case "ps1":
-    case "tcp1":
+    case "tcp'621":
       i = 0;
       break;
       
-    case "tcp2":
-    case "tcp3":
+    case "tcp'622":
+    case "tcp'623":
       if(pozycja == 1) i = 100;
       if(pozycja == 2) i = 80;
       if(pozycja >= 3) i = 75 - pozycja * 5;
@@ -17,7 +17,7 @@ exports.run = (typ, seria, pozycja) => {
       if(pozycja == -1) i = 0;
       break;
 
-    case "tcp4":
+    case "tcp'624":
       if(pozycja == 1) i = 100;
       if(pozycja == 2) i = 80;
       if(pozycja >= 3) i = 90 - pozycja * 10;
@@ -35,9 +35,10 @@ exports.run = (typ, seria, pozycja) => {
       if(pozycja == -1) i = 0;
       break;
 
-    case "k31":
+    case "k3'221":
     case "wk1":
     case "tdw1":
+    case "tcp1":
       if(pozycja == 1) i = 200;
       if(pozycja == 2) i = 160;
       if(pozycja >= 3) i = 150 - pozycja * 10;

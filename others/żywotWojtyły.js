@@ -26,6 +26,8 @@ exports.run = (konkursy, użytkownicy, channel, typ, rokS) => {
   }
 
   var obietnice = []
+  if(typ == "tcp'62") typ = 'tcp'
+  if(typ == "k3'22") typ = 'k3'
   if(typ != 'mś' && typ != 'mśwl') obietnice.push(Canvas.loadImage(`./photos/${typ}.png`))
   else if(typ == 'mś') obietnice.push(Canvas.loadImage(`./photos/ms.png`))
   else obietnice.push(Canvas.loadImage(`./photos/mswl.png`))
