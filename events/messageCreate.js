@@ -23,13 +23,13 @@ module.exports = (client, message) => {
         return
     }
 
-    if((polecenie == 'usuń' || polecenie == 'zweryfikuj') && !(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
+    if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'ustawImięBossa') && !(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
       message.channel.send("co wolno wojewoDŹe to ńe Tobie")
       return
     }
 
     if(polecenie.startsWith('zz') && message.author.id != '691720485343592469'){
-      message.channel.send("KO[menda] zbyt potężna dla zwykłego śmiRtLńK")
+      message.channel.send("KO[menda] zbyt potężna dla zwykłego śμRtLńK")
       return
     }
 
@@ -43,17 +43,20 @@ module.exports = (client, message) => {
     const wiad = (info) => message.channel.send(`wszystkie ślady wsKzują na to, że argumNt na miejscu ${info} ńe jSt liczbą`) 
 
     const isT = (typ) => {
-      return ['ind', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'io', 'mś', 'mśwl', 'pt', 'wk', 'vc', 'tdw', 'mn', "tcp'62", "k3'22"].includes(typ) || (typeof typ == 'undefined')
+      return ['ind', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'io', 'mś', 'mśwl', 'pt', 'wk', 'vc', 'tdw', 'mn', 'gp', 'bf', "tcp'62", "k3'22"].includes(typ) || (typeof typ == 'undefined')
     }
 
     const sprParam = () => {
       let ok = []
+      let ok1 = ['arch']
       if(polecenie == 'tabela') ok = ['nicki', 'pingi', 's', 'żw']
       if(polecenie == 'staty') ok = ['p1', 'top3', 'dsq']
       if(polecenie == 'usuń' || polecenie == 'spis') ok = ['w', 'dzw']
 
-      if(!ok.includes(argumenty[0])) message.channel.send(`użyto złego parametru`)
-      return ok.includes(argumenty[0])
+      let bool = ok.includes(argumenty[0].split('-')[0]) 
+      && (typeof argumenty[0].split('-')[1] == 'undefined' || ok1.includes(argumenty[0].split('-')[1]));
+      if(!bool) message.channel.send(`użyto złego parametru`)
+      return bool
     }
     
     const spr = (i) => {

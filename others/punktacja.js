@@ -3,9 +3,23 @@ exports.run = (typ, seria, pozycja) => {
   typ = typ.toString();
   seria = seria.toString();
   switch(typ+seria){
+    case "mś1":
     case "ps1":
     case "tcp'621":
       i = 0;
+      break;
+
+    case "mś2":
+      if(pozycja >= 1) i = 0;
+      if(pozycja >= 6) i = 12 - pozycja;
+      if(pozycja == -1) i = 1;
+      break;
+
+    case "mś3":
+    case "gp1":
+      if(pozycja >= 1) i = 120 - pozycja * 20;
+      if(pozycja >= 4) i = 90 - pozycja * 10;
+      if(pozycja == -1) i = 10;
       break;
       
     case "tcp'622":

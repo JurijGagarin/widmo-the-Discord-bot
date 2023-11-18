@@ -66,6 +66,8 @@ exports.run = (konkursy, użytkownicy, channel, rodzaj, typ) => {
       if(typ == 'mśwl') output = 'MŚwL'
       if(typ == 'io') output = 'IGRZYSKA OLIMPIJSKIE'
       if(typ == 'mn') output = 'MARATON'
+      if(typ == 'gp') output = 'GRAND PRIX'
+      if(typ == 'bf') output = 'BOSS FIGHT'
       output += ' KLASYFIKACJA GENERALNA'
       context.fillText(output.trim(), 1498, 84);
   

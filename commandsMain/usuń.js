@@ -9,7 +9,7 @@ exports.run = (client, message, argumenty) => {
     argumenty.shift()
   }
 
-  let if1 = ['ind', 'k3', 'wt', 'tcp', 'pt', 'wk', 'vc', 'tdw', 'druż', 'duety', 'mn', "k3'22"].includes(argumenty[1])
+  let if1 = ['ind', 'k3', 'wt', 'tcp', 'pt', 'wk', 'vc', 'tdw', 'druż', 'duety', 'gp', "k3'22"].includes(argumenty[1])
   let if2 = (argumenty[1] == 'mś' || argumenty[1] == 'mśwl') && argumenty[2] == '1'
   if(if1 || if2){
     argumenty.pop()
@@ -20,6 +20,10 @@ exports.run = (client, message, argumenty) => {
   }
   
   if(['io', 'mś', 'mśwl'].includes(argumenty[1]) && argumenty[2] != '1'){
+    db.del(argumenty.join(' ') + ' t', message.channel)
+  }
+
+  if(['mn', 'bf'].includes(argumenty[1])){
     db.del(argumenty.join(' ') + ' t', message.channel)
   }
   

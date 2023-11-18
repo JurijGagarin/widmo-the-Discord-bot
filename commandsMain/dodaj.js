@@ -3,6 +3,7 @@ const punktacja = require("../others/punktacja.js")
 const tcp = require("../others/tcp'62.js")
 const io = require("../others/io.js")
 const vc = require("../others/vc.js")
+const bf = require("../others/bf.js")
 const { PermissionsBitField, VoiceChannel } = require('discord.js');
 const messageCreate = require('../events/messageCreate.js');
 var listaKrajów = ['Afganistan', 'Albania', 'Algieria', 'Andora', 'Angola', 'Anguilla', 'Antarktyka', 'Antigua i Barbuda', 'Arabia Saudyjska', 'Argentyna', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbejdżan', 'Bahamy', 'Bahrajn', 'Bangladesz', 'Barbados', 'Belgia', 'Belize', 'Benin', 'Bermudy', 'Bhutan', 'Białoruś', 'Birma', 'Boliwia', 'Bonaire, Sint Eustatius i Saba', 'Holandia Karaibska', 'Bośnia i Hercegowina', 'Botswana', 'Brazylia', 'Brunei', 'Brytyjskie Terytorium Oceanu Indyjskiego', 'Brytyjskie Wyspy Dziewicze', 'Bułgaria', 'Burkina Faso', 'Burundi', 'Chile', 'Chiny', 'Chorwacja', 'Curaçao', 'Cypr', 'Czad', 'Czarnogóra', 'Czechy', 'Dalekie Wyspy Mniejsze Stanów Zjednoczonych', 'Dania', 'Demokratyczna Republika Konga', 'Dominika', 'Dominikana', 'Dżibuti', 'Egipt', 'Ekwador', 'Erytrea', 'Estonia', 'Eswatini', 'Etiopia', 'Falklandy', 'Fidżi', 'Filipiny', 'Finlandia', 'Francja', 'Francuskie Terytoria Południowe i Antarktyczne', 'FTPiA', 'Gabon', 'Gambia', 'Georgia Południowa i Sandwich Południowy', 'Ghana', 'Gibraltar', 'Grecja', 'Grenada', 'Grenlandia', 'Gruzja', 'Guam', 'Guernsey', 'Gujana Francuska', 'Gujana', 'Gwadelupa', 'Gwatemala', 'Gwinea Bissau', 'Gwinea Równikowa', 'Gwinea', 'Haiti', 'Hiszpania', 'Holandia', 'Honduras', 'Hongkong', 'Indie', 'Indonezja', 'Irak', 'Iran', 'Irlandia', 'Islandia', 'Izrael', 'Jamajka', 'Japonia', 'Jemen', 'Jersey', 'Jordania', 'Kajmany', 'Kambodża', 'Kamerun', 'Kanada', 'Katar', 'Kazachstan', 'Kenia', 'Kirgistan', 'Kiribati', 'Kolumbia', 'Komory', 'Kongo', 'Korea Południowa', 'Korea Północna', 'Kosowo', 'Kostaryka', 'Kuba', 'Kuwejt', 'Laos', 'Lesotho', 'Liban', 'Liberia', 'Libia', 'Liechtenstein', 'Litwa', 'Luksemburg', 'Łotwa', 'Macedonia Północna', 'Madagaskar', 'Majotta', 'Makau', 'Malawi', 'Malediwy', 'Malezja', 'Mali', 'Malta', 'Malwiny', 'Mariany Północne', 'Maroko', 'Martynika', 'Mauretania', 'Mauritius', 'Meksyk', 'Mikronezja', 'Mjanma', 'Mołdawia', 'Monako', 'Mongolia', 'Montserrat', 'Mozambik', 'Namibia', 'Nauru', 'Nepal', 'Niemcy', 'Niger', 'Nigeria', 'Nikaragua', 'Niue', 'Norfolk', 'Norwegia', 'Nowa Kaledonia', 'Nowa Zelandia', 'Oman', 'Pakistan', 'Palau', 'Palestyna', 'Panama', 'Papua-Nowa Gwinea', 'Paragwaj', 'Peru', 'Pitcairn', 'Polinezja Francuska', 'Polska', 'Portoryko', 'Portugalia', 'Republika Południowej Afryki', 'Republika Środkowoafrykańska', 'Republika Zielonego Przylądka', 'Reunion', 'Rosja', 'RPA', 'Rumunia', 'Rwanda', 'Sahara Zachodnia', 'Saint Kitts i Nevis', 'Saint Lucia', 'Saint Vincent i Grenadyny', 'Saint-Barthélemy', 'Saint-Martin', 'Saint-Pierre i Miquelon', 'Salwador', 'Samoa Amerykańskie', 'Samoa', 'San Marino', 'Senegal', 'Serbia', 'Seszele', 'Sierra Leone', 'Singapur', 'Sint Maarten', 'Słowacja', 'Słowenia', 'Somalia', 'Sri Lanka', 'Stany Zjednoczone', 'Suazi', 'Sudan', 'Sudan Południowy', 'Surinam', 'Svalbard i Jan Mayen', 'Syria', 'Szwajcaria', 'Szwecja', 'Tadżykistan', 'Tajlandia', 'Tajwan', 'Tanzania', 'Timor Wschodni', 'Togo', 'Tokelau', 'Tonga', 'Trynidad i Tobago', 'Tunezja', 'Turcja', 'Turkmenistan', 'Turks i Caicos', 'Tuvalu', 'Uganda', 'Ukraina', 'Urugwaj', 'Uzbekistan', 'Vanuatu', 'Wallis i Futuna', 'Watykan', 'Wenezuela', 'Węgry', 'Wielka Brytania', 'Wietnam', 'Włochy', 'Wybrzeże Kości Słoniowej', 'Wyspa Bouveta', 'Wyspa Bożego Narodzenia', 'Wyspa Man', 'Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha', 'Wyspy Alandzkie', 'Wyspy Cooka', 'Wyspy Dziewicze Stanów Zjednoczonych', 'Wyspy Heard i McDonald', 'Wyspy Heard i McDonalda', 'Wyspy Kokosowe', 'Wyspy Marshalla', 'Wyspy Owcze', 'Wyspy Salomona', 'Wyspy Świętego Tomasza i Książęca', 'Wyspy Zielonego Przylądka', 'Zambia', 'Zimbabwe', 'Zjednoczone Emiraty Arabskie', 'Anglia', 'Walia', 'Szkocja', 'Irlandia Północna', 'Wyspa Świętej Heleny','Wyspa Wniebowstąpienia', 'Tristan da Cunha', 'Bougainville']
@@ -27,7 +28,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   let bool4 = typ == 'mś' && seriaN > 4
   let bool3 = ["tcp'62", 'mśwl'].includes(typ) && seriaN > 3
   let bool2 = ['ps', 'io'].includes(typ) && seriaN > 2
-  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'tcp', 'wk', 'vc', 'mn', 'ind', 'druż', 'duety', "k3'22"].includes(typ) && seriaN > 1
+  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'tcp', 'wk', 'vc', 'mn', 'gp', 'ind', 'druż', 'duety', "k3'22"].includes(typ) && seriaN > 1
   if(bool1 || bool2 || bool3 || bool4){
     message.channel.send('zbyt wysoki numR sRii')
     return
@@ -106,11 +107,11 @@ exports.run = (client, message, argumenty, usunąć) => {
   var drużynyJSON = JSON.stringify(drużyny)
   var hasło = ''
   var dzw = 'do zweryfikowania - - - - - '
-  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && !message.author.id == '691720485343592469') hasło += dzw
+  if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && message.author.id != '691720485343592469') hasło += dzw
   hasło += rok + ' ' + typ + ' ' + dzień
   
   
-  if(['ind', 'k3', 'wt', 'tcp', 'wk', 'tdw', 'pt', "k3'22",].some(el => el == typ)){
+  if(['ind', 'k3', 'wt', 'tcp', 'wk', 'tdw', 'pt', "k3'22"].some(el => el == typ)){
     db.set(hasło + ' i', zawodnicyJSON, message.channel)
     db.set(hasło + ' n', drużynyJSON, message.channel)
   }
@@ -152,8 +153,12 @@ exports.run = (client, message, argumenty, usunąć) => {
     db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, message.channel)
   }
 
-  if(typ == 'mn'){
+  if(typ == 'mn' || typ == 'gp'){
     db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, message.channel)
+  }
+
+  if(typ == 'bf'){
+    bf.run(client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, message.channel)
   }
 }
 

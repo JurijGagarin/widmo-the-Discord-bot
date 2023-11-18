@@ -8,7 +8,11 @@ var listaKodów2 = ['AF', 'AL', 'DZ', 'AD', 'AO', 'AI', 'AQ', 'AG', 'SA', 'AR', 
 
 
 exports.run = (client, message, argumenty) => {
-  var [parametr, rokS, protoTyp, dzień, seria] = argumenty
+  var [protoParametr, rokS, protoTyp, dzień, seria] = argumenty
+
+  protoParametr = protoParametr.split('-')
+  var parametr = protoParametr[0]
+  var isArch = (protoParametr[1] == 'arch')
   
   protoTyp = protoTyp.split('-')
   var typ = protoTyp[0] || ''
@@ -20,7 +24,7 @@ exports.run = (client, message, argumenty) => {
   if(rodzaj == ''){
     if(['ind', 'k3', 'wt', 'ps', 'tcp', 'pt', 'wk', 'vc', 'tdw', "k3'22"].some(el => el == typ)) rodzaj = 'i'
     if(typ == 'druż' || typ == 'duety') rodzaj = 'n'
-    if(typ == "tcp'62" || typ == 'mn') rodzaj = 't'
+    if(typ == "tcp'62" || typ == 'mn' || typ == 'gp' || typ == 'bf') rodzaj = 't'
     if((typ == 'io' || typ == 'mś' || typ == 'mśwl') && dzień == 1) rodzaj = 'd'
     if((typ == 'io' || typ == 'mś' || typ == 'mśwl') && dzień != 1) rodzaj = 't'
   }
@@ -30,7 +34,10 @@ exports.run = (client, message, argumenty) => {
   var hasło = `${rokS} ${typ}`
   if(dzień) hasło += ` ${dzień}`
   if(seria) hasło += ` ${seria}`
-  if(typ == 'ind' || typ == 'druż') hasło = rokS
+  if((typ == 'ind' || typ == 'druż') && !isArch) hasło = rokS
+
+  var output = ''
+  if(isArch) output += hasło + ` (${rodzaj})` + '\n'
   
 
 
@@ -57,7 +64,6 @@ exports.run = (client, message, argumenty) => {
       return
     }
     if(parametr == 'pingi'){
-      var output = ''
       for(let k = 0; k < konkursy.length; k++){
         if(konkursy[k]) output += `${konkursy[k].jakiAwans}. <@${konkursy[k].id}>\n`
       }
@@ -69,7 +75,6 @@ exports.run = (client, message, argumenty) => {
         obietniceZawodników.push(client.users.fetch(konkursy[l].id));
       }
       Promise.all(obietniceZawodników).then(nicki => {
-        var output = ''
         for(let q = 0; q < nicki.length; q++){
           output += `${konkursy[q].jakiAwans}. ${nicki[q].username}\n`
         }
@@ -94,7 +99,6 @@ exports.run = (client, message, argumenty) => {
 
 
     if(parametr == 'pingi'){
-      var output = ''
       var nr = 1
       for(let k = 0; k < konkursy.length; k++){
         if(k > 0 && konkursy[k].punkty != konkursy[k-1].punkty) nr = k + 1
@@ -109,11 +113,12 @@ exports.run = (client, message, argumenty) => {
       }
       Promise.all(obietniceZawodników).then(nicki => {
         if(parametr == 'nicki'){
-          var output = ''
           var nr = 1
           for(let q = 0; q < nicki.length; q++){
             if(q > 0 && konkursy[q].punkty != konkursy[q-1].punkty) nr = q + 1
-            output += `${nr}. ${nicki[q].username}—  ${konkursy[q].punkty} pkt.\n`
+            output += `${nr}. ${nicki[q].username}—  ${konkursy[q].punkty} pkt.`
+            if(isArch && konkursy[q].pozycja == -1) output += ' -<:DSQ:874279963841400833>'
+            output += '\n'
           }
           output != '' ? message.reply(output) : message.reply('tabLa jSt pusta') 
         }
@@ -164,7 +169,6 @@ exports.run = (client, message, argumenty) => {
 
 
     if((parametr == 'pingi'|| parametr == 'nicki') && rodzaj == 'n'){
-      var output = ''
       var nr = 1
       for(let q = 0; q < konkursy.length; q++){
         if(q > 0 && konkursy[q].punkty != konkursy[q-1].punkty) nr = q + 1
@@ -173,7 +177,6 @@ exports.run = (client, message, argumenty) => {
       output != '' ? message.reply(output) : message.reply('tabLa jSt pusta') 
     }
     else if(parametr == 'pingi' && rodzaj == 'd'){
-      var output = ''
       var nr = 1
       for(let q = 0; q < konkursy.length; q++){
         if(q > 0 && konkursy[q].punkty != konkursy[q-1].punkty) nr = q + 1
@@ -202,7 +205,6 @@ exports.run = (client, message, argumenty) => {
         else obietniceZawodników.push(client.users.fetch(konkursy[l].id1));
       }
       Promise.all(obietniceZawodników).then(nicki => {
-        var output = ''
         var nr = 1
         for(let q = 0; q < konkursy.length; q++){
           if(q > 0 && konkursy[q].punkty != konkursy[q-1].punkty) nr = q + 1
