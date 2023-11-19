@@ -42,4 +42,4 @@ for (const file of ballsCommands) {
   client.commandsKulki.set(commandName, command);
 }*/
 
-client.login(process.env.token)
+client.login(process.env.TOKEN)

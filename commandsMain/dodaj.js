@@ -24,6 +24,7 @@ exports.run = (client, message, argumenty, usunąć) => {
     return
   }
 
+  let prawdziwyTyp = typ
   if(['io', 'mś', 'mśwl'].includes(typ)){
     if(dzień == 1) typ += 'd'
     else typ += 't'
@@ -113,7 +114,7 @@ exports.run = (client, message, argumenty, usunąć) => {
   var hasło = ''
   var dzw = 'do zweryfikowania - - - - - '
   if(!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) && message.author.id != '691720485343592469') hasło += dzw
-  hasło += rok + ' ' + typ + ' ' + dzień
+  hasło += rok + ' ' + prawdziwyTyp + ' ' + dzień
   
   
   if(['ind', 'k3', 'wt', 'tcp', 'wk', 'tdw', 'pt', "k3'22"].some(el => el == typ)){
