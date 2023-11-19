@@ -24,11 +24,16 @@ exports.run = (client, message, argumenty, usunąć) => {
     return
   }
 
+  if(['io', 'mś', 'mśwl'].includes(typ)){
+    if(dzień == 1) typ += 'd'
+    else typ += 't'
+  }
+
   let seriaN = +seria
-  let bool4 = typ == 'mś' && seriaN > 4
-  let bool3 = ["tcp'62", 'mśwl'].includes(typ) && seriaN > 3
-  let bool2 = ['ps', 'io'].includes(typ) && seriaN > 2
-  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'tcp', 'wk', 'vc', 'mn', 'gp', 'ind', 'druż', 'duety', "k3'22"].includes(typ) && seriaN > 1
+  let bool4 = typ == 'mśt' && seriaN > 4
+  let bool3 = ["tcp'62", 'mśwlt'].includes(typ) && seriaN > 3
+  let bool2 = ['ps', 'iod', 'iot'].includes(typ) && seriaN > 2
+  let bool1 = ['wt', 'k3', 'tdw', 'pt', 'tcp', 'wk', 'vc', 'mśd', 'mśwld', 'mn', 'gp', 'ind', 'druż', 'duety', "k3'22"].includes(typ) && seriaN > 1
   if(bool1 || bool2 || bool3 || bool4){
     message.channel.send('zbyt wysoki numR sRii')
     return
@@ -83,7 +88,7 @@ exports.run = (client, message, argumenty, usunąć) => {
       if(znaleziono == false) drużynyVC.push({nazwa: zawodnicy[i].kraj, punkty: zawodnicy[i].punkty})
     }
 
-    if(['druż', 'duety', 'mś', 'mśwl', 'vc'].some(el => el == typ)){
+    if(['druż', 'duety', 'mśd', 'mśwld', 'vc'].some(el => el == typ)){
       let znaleziono = false
       for(let j in drużyny){
       	if(drużyny[j].nazwa == zawodnicy[i].kraj){
@@ -141,15 +146,15 @@ exports.run = (client, message, argumenty, usunąć) => {
     db.set(hasło + ' n', drużynyJSON, message.channel)
   }
 
-  if((typ == 'mś' || typ == 'mśwl') && dzień == 1){
+  if(typ == 'mśd' || typ == 'mśwld'){
     db.set(hasło + ' d', drużynyJSON, message.channel)
   }
 
-  if(typ == 'io' && dzień == 1){
+  if(typ == 'iod'){
     io.run(hasło, zawodnicyJSON, seria, usunąć, message.channel)
   }
 
-  if(((typ == 'mś' || typ == 'mśwl' || typ == 'io') && dzień != 1)){
+  if(['iot', 'mśt', 'mśwlt'].includes(typ)){
     db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, message.channel)
   }
 
