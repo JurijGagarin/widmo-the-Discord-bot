@@ -10,7 +10,7 @@ exports.run = (typ, seria, pozycja) => {
       break;
 
     case "mśt2":
-      if(pozycja >= 1) i = 0;
+      if(pozycja >= 1) i = 10;
       if(pozycja >= 6) i = 12 - pozycja;
       if(pozycja == -1) i = 1;
       break;
