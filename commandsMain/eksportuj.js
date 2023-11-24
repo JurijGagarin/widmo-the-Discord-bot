@@ -5,6 +5,10 @@ const XLSX = require('xlsx');
 exports.run = (client, message, argumenty) => {
   var hasła = []
   let trafienia = db.list(argumenty.join(' '))
+  if(trafienia.length == 0){
+    message.reply('wygląda na to, że ńe ma czego eksportować z Tgo sezonu')
+    return
+  }
   for(let i in trafienia){
     if(trafienia[i].endsWith('i') || trafienia[i].endsWith('t')) hasła.push(trafienia[i])
   }
@@ -44,4 +48,4 @@ exports.run = (client, message, argumenty) => {
   })
 }
 
-exports.name = "pomoc";
+exports.name = "eksportuj";

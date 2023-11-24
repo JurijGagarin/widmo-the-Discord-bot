@@ -17,13 +17,12 @@ module.exports = (client, message) => {
   }
   else if(polecenie[0] == '&'){
     polecenie = polecenie.slice(1)
-    if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'dodaj') &&
-      !(message.guild.id == '1094901377731403866' || message.guild.id == '874212818176593930' || message.guild.id == '874357478672969768')){
+    if(['usuń', 'zweryfikuj', 'dodaj', 'ustawimiębossa', 'ustawkalendarz'].includes(polecenie) && !(message.guild.id == '1094901377731403866' || message.guild.id == '874212818176593930' || message.guild.id == '874357478672969768')){
         message.channel.send("ta KO[menda] może działać tylko na wybranych serwerach")
         return
     }
 
-    if((polecenie == 'usuń' || polecenie == 'zweryfikuj' || polecenie == 'ustawImięBossa') && !(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
+    if(['usuń', 'zweryfikuj', 'ustawimiębossa', 'ustawkalendarz'].includes(polecenie) && !(message.member.permissions.has(PermissionsBitField.Flags.KickMembers) || message.author.id == '691720485343592469')){
       message.channel.send("co wolno wojewoDŹe to ńe Tobie")
       return
     }
@@ -71,7 +70,7 @@ module.exports = (client, message) => {
       return j != 5 ? true : false
     }
 
-    if((polecenie == 'dodaj' || polecenie == 'zweryfikuj') && spr(0)) return
+    if(['zweryfikuj', 'dodaj', 'eksportuj'].includes(polecenie) && spr(0)) return
     if(['usuń', 'tabela', 'spis', 'staty'].includes(polecenie) && spr(1)) return
 
 
@@ -100,6 +99,7 @@ module.exports = (client, message) => {
     if(polecenie == 'tabela' && sprDł(3, 5)) return
     if(polecenie == 'spis' && sprDł(1, 4)) return
     if(polecenie == 'staty' && sprDł(2, 2)) return
+    if(polecenie == 'eksportuj' && sprDł(1, 3)) return
 
     const cmd = client.commandsMain.get(polecenie);
     if (!cmd){

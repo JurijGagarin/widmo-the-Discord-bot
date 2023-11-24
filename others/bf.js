@@ -20,6 +20,7 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
 
     let suma = 0
     for(let i in konkursy) suma += konkursy[i].punkty
+    suma = suma / 3
     client.HPbossa = suma
     channel.send(`Kości zostały rzucone. ${imięPapieżaM} wkracza do gry z liczbą ${suma} punktów życia`)
 
@@ -41,12 +42,12 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
       return acc
     }, {}))
 
-    let dsq2 = konkursy.filter((e) => {return e.liczbaDSQ >= 2})
+    let dsq3 = konkursy.filter((e) => {return e.liczbaDSQ >= 3})
 
     let błędy = []
     for(let i = 0; i < zawodnicy.length; i++){
-      for(let j = 0; j < dsq2.length; j++){
-        if(zawodnicy[i].id == dsq2[j]?.id) {
+      for(let j = 0; j < dsq3.length; j++){
+        if(zawodnicy[i].id == dsq3[j]?.id) {
           błędy.push(zawodnicy[i].id)
           zawodnicy.splice(i, 1) 
           i--;
@@ -92,22 +93,22 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
       return acc
     }, {}))
 
-    dsq2 = konkursy.filter((e) => {return e.liczbaDSQ >= 2})
-    let dsq1 = konkursy.filter((e) => {return e.liczbaDSQ == 1})
+    dsq3 = konkursy.filter((e) => {return e.liczbaDSQ >= 3})
+    let dsq2 = konkursy.filter((e) => {return e.liczbaDSQ == 2})
 
 
     let zmarli = []
     let zagrożeni = []
     
     for(let i = 0; i < zawodnicy.length; i++){
-      for(let j = 0; j < dsq2.length; j++){
-        if(zawodnicy[i].id == dsq2[j]?.id) {
+      for(let j = 0; j < dsq3.length; j++){
+        if(zawodnicy[i].id == dsq3[j]?.id) {
           zmarli.push(zawodnicy[i].id)
           break;
         }
       }
-      for(let j = 0; j < dsq1.length; j++){
-        if(zawodnicy[i].id == dsq1[j]?.id) {
+      for(let j = 0; j < dsq2.length; j++){
+        if(zawodnicy[i].id == dsq2[j]?.id) {
           zagrożeni.push(zawodnicy[i].id)
           break;
         }
