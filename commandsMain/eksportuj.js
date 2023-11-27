@@ -21,7 +21,7 @@ exports.run = (client, message, argumenty) => {
 
   let obietniceZawodników = [];
   for (let l = 0; l < listaID.length; l++) {
-    obietniceZawodników.push(client.users.fetch(konkursy[l].id));
+    obietniceZawodników.push(client.users.fetch(listaID[l]));
   }
   Promise.all(obietniceZawodników).then(nicki => {
     var tab = []

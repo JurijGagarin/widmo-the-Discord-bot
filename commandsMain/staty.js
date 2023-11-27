@@ -5,6 +5,11 @@ exports.run = (client, message, argumenty) => {
   
   var hasła = []
   trafienia = db.list(rokS)
+  if(trafienia.length == 0){
+    message.channel.send("ńe ma dodanych konQrsów z Tgo roQ")
+    return
+  }
+
   for(let i in trafienia){
     let trafienia2 = trafienia[i].split(' ')
     let if1 = trafienia[i].endsWith('i')
@@ -18,7 +23,13 @@ exports.run = (client, message, argumenty) => {
     if(c2 && if4) hasła.push(trafienia[i])
   }
   
+  if(hasła.length == 0){
+    message.channel.send("ńe ma dodanych konQrsów z których możnaby zrobić podaną statystykę")
+    return
+  }
   
+
+
   konkursy = db.mget(hasła)
   for(let j in konkursy){
     konkursy[j] = JSON.parse(konkursy[j])
