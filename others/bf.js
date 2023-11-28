@@ -20,7 +20,7 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
 
     let suma = 0
     for(let i in konkursy) suma += konkursy[i].punkty
-    suma = suma / 3
+    suma = Math.floor(suma / 3)
     client.HPbossa = suma
     channel.send(`Kości zostały rzucone. ${imięPapieżaM} wkracza do gry z liczbą ${suma} punktów życia`)
 
