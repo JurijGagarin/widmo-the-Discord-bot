@@ -1,5 +1,7 @@
 exports.run = (client, message, argumenty) => {
-  client.imięPapieżaM = argumenty.join(' ')
+  let argumentyBis = message.content.split(' ')
+  argumentyBis.shift()
+  client.imięPapieżaM = argumentyBis.join(' ')
   message.reply('Iμę zmieńono pomyślńe')
 }
 
