@@ -1,5 +1,5 @@
 const db = require('../databaseMain/db.js')
-const punktacja = require("./punktacja.js")
+const punktacja = require("../others/punktacja.js")
 
 exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, channel) => {
   let imięPapieżaM = ''
@@ -8,7 +8,7 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
   
 
   if(seria == 1){
-    var hasła = []
+    /*var hasła = []
     let trafienia = db.list(rok)
     for(let i in trafienia){
       if(trafienia[i].endsWith('i')) hasła.push(trafienia[i])
@@ -22,7 +22,9 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
     for(let i in konkursy) suma += konkursy[i].punkty
     suma = Math.floor(suma / 3)
     client.HPbossa = suma
-    channel.send(`Kości zostały rzucone. ${imięPapieżaM} wkracza do gry z liczbą ${suma} punktów życia`)
+    channel.send(`Kości zostały rzucone. ${imięPapieżaM} wkracza do gry z liczbą ${suma} punktów życia`)*/
+    client.HPbossa = 15000
+    channel.send(`Kości zostały rzucone. ${imięPapieżaM} wkracza do gry z liczbą 15000 punktów życia, bo Naruku pojebało i chce żeby event trwał do jutra`)
 
     db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, channel)
   }
@@ -129,7 +131,7 @@ exports.run = (client, hasło, rok, dzień, seria, zawodnicy, zawodnicyJSON, cha
     else{
       output += `Hej`
       for(let i in zagrożeni) output += `, <@${zagrożeni[i]}>`
-      output += `, uważajże, tylko jedno DSQ DŹli was od śmiRć`
+      output += `, uważajcie, tylko jedno DSQ DŹli was od śmiRć`
     }
     channel.send(output)
   }

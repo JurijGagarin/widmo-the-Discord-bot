@@ -2,6 +2,7 @@ exports.run = (typ, seria, pozycja) => {
   var i;
   typ = typ.toString();
   seria = seria.toString();
+  if(typ == 'bf') seria = '1'
   switch(typ+seria){
     case "mśt1":
     case "ps1":
@@ -21,6 +22,14 @@ exports.run = (typ, seria, pozycja) => {
       if(pozycja >= 4) i = 90 - pozycja * 10;
       if(pozycja == -1) i = 10;
       break;
+
+    case "bf1":
+      if(pozycja >= 1) i = 140 - pozycja * 40
+      if(pozycja >= 3) i = 50 - pozycja * 5
+      if(pozycja >= 9) i = 5
+      if(pozycja >= 20) i = 0
+      if(pozycja == -1) i = 0;
+      break;
       
     case "tcp'622":
     case "tcp'623":
@@ -37,15 +46,6 @@ exports.run = (typ, seria, pozycja) => {
       if(pozycja >= 3) i = 90 - pozycja * 10;
       if(pozycja >= 8) i = 55 - pozycja * 5;
       if(pozycja >= 11) i = 0;
-      if(pozycja == -1) i = 0;
-      break;
-
-    case "ps2":
-      if(pozycja == 1) i = 100;
-      if(pozycja == 2) i = 80;
-      if(pozycja >= 3) i = 90 - pozycja * 10;
-      if(pozycja >= 6) i = 65 - pozycja * 5;
-      if(pozycja >= 13) i = 0;
       if(pozycja == -1) i = 0;
       break;
 

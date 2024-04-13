@@ -32,8 +32,8 @@ exports.run = (client, message, argumenty) => {
   
   var hasło = `${rokS} ${typ}`
   if(dzień) hasło += ` ${dzień}`
-  if(seria) hasło += ` ${seria}`
-  if((typ == 'ind' || typ == 'druż') && !isArch) hasło = rokS
+  if(seria && rodzaj == 't') hasło += ` ${seria}`
+  if((typ == 'ind' || typ == 'druż') && !isArch && typeof dzień == 'undefined') hasło = rokS
 
   var output = ''
   if(isArch) output += hasło + ` (${rodzaj})` + '\n'
@@ -94,8 +94,8 @@ exports.run = (client, message, argumenty) => {
       }
       return acc
     }, {}))
-    konkursy.sort((a, b) => (a.punkty < b.punkty) ? 1 : -1);
-
+    if(hasła.length == 1) konkursy.sort((a, b) => (a.pozycja == -1 || b.pozycja == -1) ? (b.pozycja - a.pozycja) : (b.punkty - a.punkty))
+    else konkursy.sort((a, b) => (a.punkty < b.punkty) ? 1 : -1);
 
     if(parametr == 'pingi'){
       var nr = 1
@@ -115,11 +115,11 @@ exports.run = (client, message, argumenty) => {
           var nr = 1
           for(let q = 0; q < nicki.length; q++){
             if(q > 0 && konkursy[q].punkty != konkursy[q-1].punkty) nr = q + 1
-            output += `${nr}. ${nicki[q].username}—  ${konkursy[q].punkty} pkt.`
-            if(isArch && konkursy[q].pozycja == -1) output += ' -<:DSQ:874279963841400833>'
-            output += '\n'
+            if(isArch && konkursy[q].pozycja == -1) output += '<:DSQ:874279963841400833>'
+            else output += `${nr}.`
+            output += ` ${nicki[q].username}—  ${konkursy[q].punkty} pkt.\n`
           }
-          output != '' ? message.reply(output) : message.reply('tabLa jSt pusta') 
+          output != '' ? message.reply(output.replace(/_/g, '\\_')) : message.reply('tabLa jSt pusta') 
         }
         if(parametr == 's'){
           skokowa.run(konkursy, nicki, message.channel, rodzaj, typ)

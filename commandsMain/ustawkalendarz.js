@@ -5,8 +5,9 @@ exports.run = (client, message, argumenty) => {
   let rok = dni.shift().split(' ')[1]
   let miesiącIrl = (rok - 63) % 12 + 1
   for(let i = 0; i < dni.length; i++){
-    if(['ind', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'pt', 'wk', 'vc', 'tdw', 'mn', 'gp', 'bf', "tcp'62", "k3'22"].includes(dni[i])) continue
+    if(['ind', 'lc', 'druż', 'duety', 'k3', 'tcp', 'wt', 'ps', 'pt', 'wk', 'vc', 'tdw', 'mn', 'gp', 'bf', "tcp'62", "k3'22"].includes(dni[i])) continue
     if(['konkurs indywidualny', 'k. indywidualny', 'konkurs ind.', 'konkurs ind'].includes(dni[i])) dni[i] = 'ind'
+    else if(['konkurs last cup', 'k. last cup', 'last cup'].includes(dni[i])) dni[i] = 'lc'
     else if(['konkurs drużynowy', 'k. drużynowy', 'konkurs druż.', 'konkurs druż'].includes(dni[i])) dni[i] = 'druż'
     else if(['konkurs duetów', 'k. duetów'].includes(dni[i])) dni[i] = 'k3'
     else if(['kremówka3', 'kremówka 3'].includes(dni[i])) dni[i] = 'k3'
@@ -57,10 +58,10 @@ exports.run = (client, message, argumenty) => {
     else if(dni[i - 1] == dni[i]) podciąg[i] = podciąg[i - 1] + 1
     else podciąg[i] = 1
   }  
-  output += `\nPamiejtaj, że konkursy Last Cupa, WT strefowego, Papieżosa, Maratonu, Grand Prix, Boss Fight, MŚwL ind. i MŚ ind. nie są obsługiwane przez autopilota (co nie nie stoi na przeszkodzie ich obecności w powyższym kalendarzu)`
+  output += `\nPamiejtaj, że konkursy Papieżosa, Maratonu, Grand Prix, Boss Fight i strefowego WT nie są obsługiwane przez autopilota (co nie nie stoi na przeszkodzie ich obecności w powyższym kalendarzu)`
   message.reply(output)
 
-/*
+
   function czas(start){
     return (start - 27 - 1) * 60000 - 15000
   }
@@ -71,7 +72,7 @@ exports.run = (client, message, argumenty) => {
     let curtyp = dni[dzieńIrl + 1]
     let dzień = podciąg[dzieńIrl + 1]
 
-    if(['ind', 'druż', 'duety', 'tcp', 'wt', 'pt', 'wk', 'vc'].includes(curtyp)) setTimeout(kolektor(37, '874220383715344424', curtyp, dzień, 1), czas(37))
+    if(['ind', 'druż', 'tcp', 'wt', 'pt', 'wk', 'vc'].includes(curtyp)) setTimeout(kolektor(37, '874220383715344424', curtyp, dzień, 1), czas(37))
     if(curtyp == 'k3'){
       setTimeout(kolektor(30, '874220383715344424', curtyp, (dzień - 1) * 3 + 1, 1), czas(30))
       setTimeout(kolektor(33, '874220383715344424', curtyp, (dzień - 1) * 3 + 2, 1), czas(33))
@@ -115,7 +116,7 @@ exports.run = (client, message, argumenty) => {
 
       //kolektor.sort((a, b) => (a.punkty < b.punkty) ? 1 : -1);
     });
-  }*/
+  }
 }
 
 exports.name = "ustawkalendarz";

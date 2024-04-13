@@ -1,5 +1,5 @@
 const db = require('../databaseMain/db.js')
-const punktacja = require("./punktacja.js")
+const punktacja = require("../others/punktacja.js")
 
 exports.run = (hasło, seria, zawodnicyJSON, usunąć, channel) => {
   db.set(hasło + ' ' + seria + ' t', zawodnicyJSON, channel)

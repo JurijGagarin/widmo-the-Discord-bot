@@ -1,12 +1,12 @@
 const fs = require('fs')
-const mc = require('./../events/messageCreate.js')
+const mc = require('../events/messageCreate.js')
 
 exports.run = (client, message, argumenty) => {
     let dane = JSON.parse(fs.readFileSync('./databaseMain/bazaDanych.json'))
     let klucze = Object.keys(dane)
     rok = argumenty[0]
 
-    let pozostałe = ['gp', 'bf', 'druż', 'ind']
+    let pozostałe = ['gp', 'druż', 'ind']
     function logArrayWithInterval3(index) {
         if (index < pozostałe.length) {
             klucz = pozostałe[index]
@@ -31,9 +31,7 @@ exports.run = (client, message, argumenty) => {
             logArrayWithInterval2(index + 1);
             }, 10000);
         }
-        else{
-            logArrayWithInterval3(index + 1)
-        }
+        else logArrayWithInterval3(0)
     }
 
     function logArrayWithInterval(index) {
@@ -41,11 +39,13 @@ exports.run = (client, message, argumenty) => {
             let klucz = klucze[index]
             if(klucz.startsWith(`${rok}`)){
                 klucz = klucz.split(' ')
-                klucz[1] += '-' + klucz.pop()
-                klucz = klucz.join(' ')
+                if(!['mśwl', 'mś', 'io', 'bf'].includes(klucz[1])){
+                    klucz[1] += '-' + klucz.pop()
+                    klucz = klucz.join(' ')
 
-                message.content = `&tabela nicki-arch ${klucz}`
-                mc(client, message)
+                    message.content = `&tabela nicki-arch ${klucz}`
+                    mc(client, message)
+                }
 
                 setTimeout(() => {
                 logArrayWithInterval(index + 1);
@@ -61,4 +61,4 @@ exports.run = (client, message, argumenty) => {
     logArrayWithInterval(0); 
 }
 
-exports.name = "zzarchiwum";
+exports.name = "archiwum";
